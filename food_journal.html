@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Metanit.com</title>
+    </head>
+
+    <body>
+        <input type="text" style="width: 300px"/>
+        <input type="number" style="width: 300px"/>
+        <input type="datetime-local" style="width: 300px" />
+        <input type="tel" style="width: 300px" />
+        <button onclick="addInform()">Добавить</button>
+        <div id="container">
+
+        </div>
+        <script>
+            function addInform (){
+                
+                var inputs = document.getElementsByTagName("input");
+                var eatenDonut = getEatenDonut(inputs); 
+                var container = document.getElementById("container");
+                
+                var element = document.createElement("div");
+                element.style.border = "4px solid black";
+                element.style.margin = "100px";
+
+                var childOne = document.createElement("div");
+                childOne.innerText = "Марка: " + eatenDonut.stamp;
+                childOne.style.width = "200px";
+                childOne.style.display = "inline-block";
+
+                var childTwo = document.createElement("div");
+                childTwo.innerText = "Сколько съеденно: " + eatenDonut.count;
+                childTwo.style.width = "200px";
+                childTwo.style.display = "inline-block";
+
+                var childThree = document.createElement("div");
+                childThree.innerText = "Когда съеденно: " + eatenDonut.date;
+                childThree.style.width = "200px";
+                childThree.style.display = "inline-block";
+
+                element.append(childOne, childTwo, childThree);
+
+                container.append(element);
+                
+            } 
+            
+            function getEatenDonut(elements){
+                
+                var eatenDonut = {
+                    stamp: "",
+                    count: 0,
+                    date: "",
+                    phone: "",
+                };
+
+                for(index = 0; index < elements.length; index++){
+                   var input = elements[index];
+
+                   if (input.type === "text"){
+                       eatenDonut.stamp = input.value; 
+                   }
+                   else if (input.type === "number"){
+                    eatenDonut.count = input.value;
+                   }
+                   else if (input.type === "datetime-local"){
+                    eatenDonut.date = input.value;
+                   }
+                   else if (input.type === "tel"){
+                    eatenDonut.phone = input.value;
+                   }
+                   else {
+                    alert("Неверные данные");
+                   }
+                }
+
+                return eatenDonut;
+            }
+
+        </script>
+    </body>
+</html>
